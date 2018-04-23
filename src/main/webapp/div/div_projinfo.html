@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/Myjs.js"></script>
+<script src="laydate/laydate.js"></script>
+<script src="js/bootstrap-table.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+
+<link href="css/bootstrap-table.min.css" rel="stylesheet" />
+<link href="css/bootstrap.css" rel="stylesheet" />
+
+<title>查询项目</title>
+</head>
+
+<body>
+	<div class="panel panel-default" id="top_search" style="border: 0px; padding: 0px;">
+		<center>
+			<div class="panel-heading" style="margin-bottom: 0px; border: 0px; padding: 0px; height: 25px">
+				<p class="h2">查询项目</p>
+			</div>
+		</center>
+		<br />
+
+		<div class="panel-body form-group"
+			style="margin-bottom: 0px; border: 0px; padding: 0px; height: 0px">
+			<form id="search_form" onsubmit="return false" action="##" method="post">
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 150px; font-size: 16px">行业：</label>
+				<div class="col-sm-2" style="width: 200px">
+					<select class="form-control" name="search_industry" id="search_industry"
+						style="width: 180px; font-size: 18px">
+						<option value=""></option>
+						<option value="其他">其他</option>
+						<option value="电信">电信</option>
+						<option value="交通">交通</option>
+						<option value="政府">政府</option>
+						<option value="能源">能源</option>
+						<option value="医疗">医疗</option>
+						<option value="企业">企业</option>
+					</select>
+				</div>
+
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 150px; font-size: 16px">生态圈：</label>
+				<div class="col-sm-2" style="width: 200px">
+					<select class="form-control" name="search_ecosphere" id="search_ecosphere"
+						style="width: 180px; font-size: 18px">
+						<option value=""></option>
+						<option value="其他">其他</option>
+						<option value="视频">视频</option>
+						<option value="大数据">大数据</option>
+						<option value="智慧城市">智慧城市</option>
+						<option value="企业云通信">企业云通信</option>
+					</select>
+				</div>
+
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 160px; font-size: 16px">所属产品：</label>
+				<div class="col-sm-2" style="width: 200px">
+					<select class="form-control" name="search_product" id="search_product"
+						style="width: 180px; font-size: 18px">
+						<option value=""></option>
+						<option value="其他">其他</option>
+						<option value="EC">EC</option>
+						<option value="ICP">ICP</option>
+						<option value="VCN">VCN</option>
+						<option value="VCM">VCM</option>
+						<option value="eLTE">eLTE</option>
+					</select>
+				</div>
+
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 150px; font-size: 16px">项目开始时间：</label>
+				<div class="col-sm-2" style="width: 250px">
+					<input type="text" class="form-control" name="search_start_time" id="search_start_time"
+						style="width: 200px" />
+				</div>
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 150px; font-size: 16px">项目结束时间：</label>
+				<div class="col-sm-2" style="width: 250px">
+					<input type="text" class="form-control" name="search_end_time" id="search_end_time"
+						style="width: 200px" />
+				</div>
+				<br />
+				<br />
+				<br />
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 150px; font-size: 16px">项目名称：</label>
+				<div class="col-sm-2" style="width: 200px">
+					<input type="text" class="form-control" name="search_proj_name" id="search_proj_name"
+						style="width: 180px" />
+				</div>
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 150px; font-size: 16px">ISV：</label>
+				<div class="col-sm-2" style="width: 200px">
+					<input type="text" class="form-control" name="search_isv" id="search_isv" style="width: 180px" />
+				</div>
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 160px; font-size: 16px">eSDK支持人员：</label>
+				<div class="col-sm-2" style="width: 200px">
+					<input type="text" class="form-control" name="search_esdk_liaison" id="search_esdk_liaison"
+						style="width: 180px" />
+				</div>
+				<label class="col-sm-1 control-label"
+					style="text-align: right; margin-top: 10px; width: 120px; font-size: 16px">重点项目：</label>
+				<div class="col-sm-2" style="width: 70px">
+					<select class="form-control" name="search_key_proj" id="search_key_proj"
+						style="width: 70px; font-size: 18px">
+						<option value=""></option>
+						<option value="1">是</option>
+						<option value="0">否</option>
+					</select>
+				</div>
+			</form>
+
+			<div class="col-sm-2" style="width: 180px">
+				<button class="btn btn-primary" id="search_btn"
+					style="width: 130px; height: 40px; font-size: 20px; margin-left: 40px" onclick="search_row()">查询</button>
+			</div>
+			<div class="col-sm-2" style="width: 130px">
+				<button class="btn btn-primary" id="add_btn"
+					style="width: 130px; height: 40px; font-size: 20px; margin-left: 40px" onclick="to_add_tab()">添加</button>
+			</div>
+
+			<button type="button" id="download"
+				style="width: 130px; height: 40px; font-size: 20px; margin-left: 110px" id="btn_download"
+				class="btn btn-primary" onclick="export_tab()">数据导出</button>
+
+			<div id="toolbar" class="btn-group">
+				<!-- <button id="btn_delete" type="button" class="btn btn-default" onclick="delete_row()">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</button> -->
+			</div>
+
+			<div id="toolbar1" class="btn-group">
+				<!-- <button id="btn_delete" type="button" class="btn btn-default" onclick="delete_progress()">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</button> -->
+			</div>
+
+			<table id="project_tab" class="table table-hover" style="font-size: 18px">
+			</table>
+		</div>
+	</div>
+	<br />
+
+
+	<div id="top_progress" style="display: none">
+		<div class="panel-heading" style="margin-bottom: 0px; border: 0px; padding: 0px; height: 50px">
+			<center>
+				<span class="h2" id="project_name"> </span>
+			</center>
+		</div>
+		<form id="add_progress_form" onsubmit="return false" action="##" method="post">
+			<input id="proj_id" name="proj_id" type="hidden"></input>
+			<label class="col-sm-1 control-label"
+				style="text-align: right; margin-top: 30px; font-size: 18px">项目最新进度：</label>
+			<div class="col-sm-2">
+				<textarea name="content" id="content" class="form-control" style="height: 80px; width: 400px;"></textarea>
+			</div>
+
+			<div class="col-sm-2" style="margin-left: 200px; margin-top: 20px; width: 400px">
+				<input type="button" value="新增记录" class="btn btn-primary" id="add_progress_btn"
+					style="width: 150px; height: 40px; font-size: 20px;" onclick="return add_progress(this.form);" />
+				&nbsp;&nbsp;&nbsp;
+				<input type="button" value="返回" id="return_1" class="btn btn-primary"
+					style="width: 150px; height: 40px; font-size: 20px;" onclick="returnpage();" />
+			</div>
+		</form>
+		<br />
+		<br />
+		<br />
+	</div>
+	<table id="progress_tab" class="table table-hover" style="display: none; font-size: 18px" />
+
+
+	<form id="project_form" onsubmit="return false" action="##" method="post">
+		<input id="id" name="id" type="hidden"></input>
+		<table id="detail_tab" class="table table-hover" style="display: none">
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">行业*</span>
+						<select class="form-control" name="industry" id="industry"
+							style="font-size: 18px; width: 450px">
+							<option onclick="selectClick()" value=""></option>
+							<option onclick="selectClick()" value="其他">其他</option>
+							<option onclick="selectClick()" value="电信">电信</option>
+							<option onclick="selectClick()" value="交通">交通</option>
+							<option onclick="selectClick()" value="政府">政府</option>
+							<option onclick="selectClick()" value="能源">能源</option>
+							<option onclick="selectClick()" value="医疗">医疗</option>
+							<option onclick="selectClick()" value="企业">企业</option>
+						</select>
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">生态圈*</span>
+						<select class="form-control" name="ecosphere" id="ecosphere"
+							style="font-size: 18px; width: 450px">
+							<option value=""></option>
+							<option value="其他">其他</option>
+							<option value="视频">视频</option>
+							<option value="大数据">大数据</option>
+							<option value="智慧城市">智慧城市</option>
+							<option value="企业云通信">企业云通信</option>
+						</select>
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">所属产品*</span>
+						<select class="form-control" name="product" id="product" style="font-size: 18px; width: 281px">
+							<option value="其他">其他</option>
+							<option value="EC">EC</option>
+							<option value="ICP">ICP</option>
+							<option value="VCN">VCN</option>
+							<option value="VCM">VCM</option>
+							<option value="eLTE">eLTE</option>
+						</select>
+						<span class="input-group-addon" style="font-size: 18px; width: 90px">重点项目</span>
+						<select class="form-control" name="key_proj" id="key_proj"
+							style="font-size: 18px; width: 70px">
+							<option value=""></option>
+							<option value="1">是</option>
+							<option value="0">否</option>
+						</select>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">项目名称*</span>
+						<input name="proj_name" id="proj_name" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">ISV*</span>
+						<input name="isv" id="isv" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">eSDK支持*</span>
+						<input name="esdk_liaison" id="esdk_liaison" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">项目金额</span>
+						<input name="amount" id="amount" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">交付时间</span>
+						<input name="delivery_time" id="delivery_time" type="text"
+							style="font-size: 18px; width: 450px" class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">一线支持进展</span>
+						<select name="proj_status" id="proj_status" style="font-size: 18px; width: 450px"
+							class="form-control">
+							<option value=""></option>
+							<option value="未知">未知</option>
+							<option value="投标中">投标中</option>
+							<option value="前期调研">前期调研</option>
+							<option value="一期开发">一期开发</option>
+							<option value="开发对接">开发对接</option>
+						</select>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">项目接口人</span>
+						<input name="liaison" id="liaison" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">电话</span>
+						<input name="liaison_tel" id="liaison_tel" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">邮箱</span>
+						<input name="liaison_email" id="liaison_email" type="text"
+							style="font-size: 18px; width: 450px" class="form-control" />
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">我司接口部门</span>
+						<input name="huawei_liaison_dept" id="huawei_liaison_dept" type="text"
+							style="font-size: 18px; width: 450px" class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">我司接口人</span>
+						<input name="huawei_liaison" id="huawei_liaison" type="text"
+							style="font-size: 18px; width: 450px" class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">SPP状态</span>
+						<input name="spp_status" id="spp_status" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">项目开始时间</span>
+						<input name="start_time" id="start_time" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">项目结束时间</span>
+						<input name="end_time" id="end_time" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">SPP解决方案</span>
+						<input name="spp_solution" id="spp_solution" type="text" style="font-size: 18px; width: 450px"
+							class="form-control" />
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">调用能力</span>
+						<textarea name="ability" id="ability" class="form-control" style="height: 150px; width: 450px"></textarea>
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">项目背景</span>
+						<textarea name="proj_background" id="proj_background" class="form-control"
+							style="height: 150px; width: 450px"></textarea>
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">需求描述</span>
+						<textarea name="requirement" id="requirement" class="form-control"
+							style="height: 150px; width: 450px"></textarea>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div class="input-group" style="border: 0">
+						<span class="input-group-addon" style="font-size: 18px; width: 180px">备注</span>
+						<textarea name="remark" id="remark" class="form-control" style="height: 150px; width: 1710px"></textarea>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td align="center">
+					<div class="input-group" style="border: 0">
+						<input type="button" value="修改" id="edit_button" class="btn btn-primary"
+							style="width: 130px; height: 40px; font-size: 20px" onclick="return edit_project(this.form);" />
+						<input type="button" value="添加" id="add_button" class="btn btn-primary"
+							style="width: 130px; height: 40px; font-size: 20px" onclick="return add_project(this.form);" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" value="返回" id="return" class="btn btn-primary"
+							style="width: 130px; height: 40px; font-size: 20px" onclick="returnpage();" />
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<script>
+		//初始化页面内容
+		$(function() {
+			$("#toolbar1").hide();
+			$("#toolbar").show();
+			$('#project_tab').bootstrapTable({
+				method : 'post',
+				contentType : "application/x-www-form-urlencoded",
+				url : "project/query",
+				dataType : 'json',
+				toolbar : '#toolbar',//指定工具栏
+				striped : true, //是否显示行间隔色
+				pagination : true,//是否分页
+				sidePagination : "server",
+				sortable : true, //是否启用排序
+				sortName : 'id',
+				sortOrder : 'asc', //排序方式
+				queryParamsType : '',//查询参数组织方式
+				showRefresh : true, //显示刷新按钮 
+				queryParams : queryParams,//请求服务器时所传的参数
+				sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
+				pageNumber : 1, //初始化加载第一页，默认第一页
+				pageSize : 10, //每页的记录行数（*）
+				pageList : [ 10, 20, 30 ], //可供选择的每页的行数（*）
+				clickToSelect : true,//是否启用点击选中行
+				toolbarAlign : 'right',//工具栏对齐方式
+				buttonsAlign : 'right',//按钮对齐方式
+				showToggle : true, //是否显示详细视图和列表视图的切换按钮
+				showColumns : true, //是否显示所有的列
+				columns : [ {
+					title : '全选',
+					field : 'select',
+					//复选框
+					checkbox : true,
+					width : 25,
+					align : 'center',
+					valign : 'middle'
+				}, {
+					field : 'id',
+					title : 'ID',
+					visible : false,
+					width : 50,
+					align : 'center'
+				}, {
+					field : 'industry',
+					title : '行业',
+					width : 100,
+					align : 'center'
+				}, {
+					title : '生态圈',
+					field : 'ecosphere',
+					width : 100,
+					align : 'center'
+				}, {
+					title : '所属产品',
+					field : 'product',
+					align : 'center',
+					width : 100
+				}, {
+					title : '项目名称',
+					field : 'proj_name',
+					width : 200,
+					align : 'center'
+				}, {
+					title : 'ISV',
+					field : 'isv',
+					width : 150,
+					align : 'center'
+				}, {
+					title : 'eSDK支持人员',
+					field : 'esdk_liaison',
+					width : 150,
+					align : 'center'
+				}, {
+					title : '操作',
+					formatter : operateFormatter,
+					align : 'center',
+					width : 100
+				} ],
+				onLoadSuccess : function() {
+				},
+				onLoadError : function() {
+					showTips("数据加载失败！");
+				},
+				locale : 'zh-CN',//中文支持
+			})
+
+			//请求服务数据时所传参数
+			function queryParams(params) {
+				return {
+					pageNo : params.pageNumber,
+					pageSize : params.pageSize,
+
+					industry : $('#search_industry').val(),
+					ecosphere : $('#search_ecosphere').val(),
+					product : $('#search_product').val(),
+					proj_name : $('#search_proj_name').val(),
+					isv : $('#search_isv').val(),
+					esdk_liaison : $('#search_esdk_liaison').val(),
+					start_time : $('#search_start_time').val(),
+					end_time : $('#search_end_time').val(),
+					key_proj : $('#search_key_proj').val(),
+
+					sortOrder : this.sortName,//排序
+					sortName : this.sortOrder
+				//排序字段
+				}
+			}
+
+			//初始化操作列
+			function operateFormatter(value, row, index) {
+				var editDef = "<button class=\"btn btn-primary btn-xs\" id=\"to_edit\"style=\"width:60px;height:40px;font-size:18px\" onclick=\"javascript:to_edit_tab('"
+						+ row['id']
+						+ "');\">编辑</button>   <button class=\"btn btn-primary btn-xs\" id=\"showprogress\"style=\"width:60px;height:40px;font-size:18px\" onclick=\"javascript:show_progress('"
+						+ row['id']
+						+ "','"
+						+ row['proj_name']
+						+ "');\">进度</button>";
+				return editDef;
+			}
+
+			$('#search_btn').click(function() {
+				$('#project_tab').bootstrapTable('refresh', {
+					url : 'project/query'
+				});
+			})
+		})
+
+		//初始化日期组件
+		laydate.render({
+			elem : '#start_time'
+		});
+
+		laydate.render({
+			elem : '#end_time'
+		});
+
+		laydate.render({
+			elem : '#search_start_time'
+		});
+
+		laydate.render({
+			elem : '#search_end_time'
+		});
+
+		var start_time_is_null = ""
+		var end_time_is_null = ""
+	</script>
+</body>
+</html>
