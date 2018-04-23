@@ -1,3 +1,96 @@
-<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<script src="js/jquery-1.9.1.min.js"></script><script src="js/bootstrap.min.js"></script><script src="js/index.js"></script>
-<link href="css/bootstrap.css" rel="stylesheet" /><title>团队空间</title></head><body onload='init()'>    <nav class="navbar navbar-inverse" role="navigation" style="height: 60px">        <div class="container-fluid">            <div class="navbar-header" style="margin-left: 180px; margin-right: 30px">                <a class="navbar-brand" href="#" style="margin-top: 3px; font-size: 28px;" onclick="switch_workbook()">团队空间</a>            </div>            <div>                <ul class="nav navbar-nav" style="height: 60px">                    <li id="nav_workbook">                        <a style="font-size: 18px;" href="#" onclick="switch_workbook()">工作说明书</a>                    </li>                </ul>                <ul class="nav navbar-nav">                    <li id="nav_confnote">                        <a style="font-size: 18px;" href="#" onclick="switch_confnote()">会议纪要</a>                    </li>                </ul>                <ul class="nav navbar-nav">                    <li id="nav_projinfo" class="active">                        <a style="font-size: 18px;" href="#" onclick="switch_projinfo()">项目信息</a>                    </li>                </ul>                <ul class="nav navbar-nav">                    <li id="nav_jobmanage" class="dropdown" style="width: 124px">                        <a style="font-size: 18px;" href="#" class="dropdown-toggle" data-toggle="dropdown">                            任务管理                            <b class="caret"></b>                        </a>                        <ul class="dropdown-menu" style="width: 124px">                            <li>                                <a href="#">培训工作</a>                            </li>                            <li>                                <a href="#">重点项目支持</a>                            </li>                            <li class="disabled">                                <a href="#">远程实验室</a>                            </li>                            <li class="divider"></li>                            <li>                                <a href="#">团队活动</a>                            </li>                            <li class="divider"></li>                            <li>                                <a href="#">合作人员管理</a>                            </li>                        </ul>                    </li>                </ul>                <ul class="nav navbar-nav navbar-right">                    <li class="dropdown" style="margin-right: 230px">                        <a id="nav_username" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 18px;" href="#">                            <span class="glyphicon glyphicon-user"></span>                            李昆                            <b class="caret"></b>                        </a>                        <ul class="dropdown-menu" style="width: 104px">                            <li>                                <a href="#">个人中心</a>                            </li>                            <li>                                <a href="#">登出</a>                            </li>                        </ul>                    </li>                </ul>            </div>        </div>    </nav>    <div style="margin-left: 225px; margin-right: 225px; padding: 5px">        <div id="div_workbook" style="display: none"></div>        <div id="div_confnote" style="display: none"></div>        <div id="div_projinfo"></div>    </div>    <script type="text/javascript">     function init() {      $('#div_workbook').load('div/div_workbook.html');      $('#div_confnote').load('div/div_confnote.html');      $('#div_projinfo').load('div/div_projinfo.html');     }    </script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/index.js"></script>
+
+<link href="css/bootstrap.css" rel="stylesheet" />
+<title>团队空间</title>
+</head>
+<body onload='init()'>
+    <nav class="navbar navbar-inverse" role="navigation" style="height: 60px">
+        <div class="container-fluid">
+            <div class="navbar-header" style="margin-left: 180px; margin-right: 30px">
+                <a class="navbar-brand" href="#" style="margin-top: 3px; font-size: 28px;" onclick="switch_workbook()">团队空间</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav" style="height: 60px">
+                    <li id="nav_workbook">
+                        <a style="font-size: 18px;" href="#" onclick="switch_workbook()">工作说明书</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li id="nav_confnote">
+                        <a style="font-size: 18px;" href="#" onclick="switch_confnote()">会议纪要</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li id="nav_projinfo" class="active">
+                        <a style="font-size: 18px;" href="#" onclick="switch_projinfo()">项目信息</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li id="nav_jobmanage" class="dropdown" style="width: 124px">
+                        <a style="font-size: 18px;" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            任务管理
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" style="width: 124px">
+                            <li>
+                                <a href="#">培训工作</a>
+                            </li>
+                            <li>
+                                <a href="#">重点项目支持</a>
+                            </li>
+                            <li class="disabled">
+                                <a href="#">远程实验室</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">团队活动</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">合作人员管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown" style="margin-right: 230px">
+                        <a id="nav_username" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 18px;" href="#">
+                            <span class="glyphicon glyphicon-user"></span>
+                            李昆
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" style="width: 104px">
+                            <li>
+                                <a href="#">个人中心</a>
+                            </li>
+                            <li>
+                                <a href="#">登出</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-left: 225px; margin-right: 225px; padding: 5px">
+        <div id="div_workbook" style="display: none"></div>
+        <div id="div_confnote" style="display: none"></div>
+        <div id="div_projinfo"></div>
+    </div>
+    <script type="text/javascript">
+					function init() {
+						$('#div_workbook').load('div/div_workbook.html');
+						$('#div_confnote').load('div/div_confnote.html');
+						$('#div_projinfo').load('div/div_projinfo.html');
+					}
+				</script>
+</body>
+</html>
