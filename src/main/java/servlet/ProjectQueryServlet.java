@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import bean.ProjectBean;
 import bean.Projects;
 import bean.convertor.ProjectBeanConvertor;
 import common.constants.Constants;
@@ -32,6 +33,7 @@ public class ProjectQueryServlet extends HttpServlet
         System.out.println("ProjectQueryServlet doPost");
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json;charset=UTF-8");
         
         int pageNo = StringUtils.getId(req.getParameter("pageNo"));
         int pageSize = StringUtils.getId(req.getParameter("pageSize"));
@@ -80,14 +82,15 @@ public class ProjectQueryServlet extends HttpServlet
         
         for (ProjectModel project : models)
         {
-            ProjectModel row = new ProjectModel();
+            ProjectBean row = new ProjectBean();
             row.setId(project.getId());
             row.setIndustry(project.getIndustry());
             row.setEcosphere(project.getEcosphere());
-            row.setProduct(project.getProduct());
             row.setProj_name(project.getProj_name());
             row.setIsv(project.getIsv());
             row.setEsdk_liaison(project.getEsdk_liaison());
+            row.setProduct(ProjectBeanConvertor.convertProduct(project.getProduct()));
+            
             projects.getRows().add(row);
         }
         
@@ -97,5 +100,6 @@ public class ProjectQueryServlet extends HttpServlet
         
         System.out.println("ProjectQueryServlet finish doPost");
     }
+    
 }
 

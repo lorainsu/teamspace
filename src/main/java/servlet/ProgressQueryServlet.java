@@ -33,6 +33,7 @@ public class ProgressQueryServlet extends HttpServlet
         System.out.println("ProgressQueryServlet doPost");
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json;charset=UTF-8");
         
         int pageNo = StringUtils.getId(req.getParameter("pageNo"));
         int pageSize = StringUtils.getId(req.getParameter("pageSize"));

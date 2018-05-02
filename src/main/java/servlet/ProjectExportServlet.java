@@ -1,4 +1,4 @@
-package servlet;
+ckage servlet;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import bean.convertor.ProjectBeanConvertor;
 import common.constants.Constants;
@@ -36,7 +36,7 @@ public class ProjectExportServlet extends HttpServlet
     
     private static SimpleDateFormat formator = new SimpleDateFormat(Constants.DATE_FORMAT_BEAN);
     
-    private HSSFWorkbook workbook;
+    private SXSSFWorkbook workbook;
     
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -65,7 +65,7 @@ public class ProjectExportServlet extends HttpServlet
         workbook = createWorkbook(projectDao.query(model));
         
         String dateTime = new SimpleDateFormat(Constants.DATE_FORMAT_EXCEL).format(new Date());
-        String filename = new String(("项目支持信息表-" + dateTime + ".xls").getBytes(), "iso-8859-1");
+        String filename = new String(("项目支持信息表-" + dateTime + ".xlsx").getBytes(), "iso-8859-1");
         resp.setHeader("Content-Disposition", "attachment;filename=" + filename);
         resp.setContentType("application/vnd.ms-excel;charset=utf-8");
         
@@ -102,10 +102,10 @@ public class ProjectExportServlet extends HttpServlet
         System.out.println("ProjectExportServlet finish");
     }
     
-    private HSSFWorkbook createWorkbook(List<ProjectModel> models)
+    private SXSSFWorkbook createWorkbook(List<ProjectModel> models)
     {
-        workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("项目信息");
+        workbook = new SXSSFWorkbook();
+        SXSSFSheet sheet = workbook.createSheet("项目信息");
         sheet.setDefaultColumnWidth(10);
         createBanner(sheet);
         
@@ -113,99 +113,81 @@ public class ProjectExportServlet extends HttpServlet
         {
             createData(sheet, models.get(i), i);
         }
+        
         return workbook;
     }
     
-    private void createBanner(HSSFSheet sheet)
+    private void createBanner(SXSSFSheet sheet)
     {
-        HSSFCellStyle style = new BannerCellStyle(workbook).style;
-        HSSFRow row = sheet.createRow(0);
+        CellStyle style = new BannerCellStyle(workbook).style;
+        SXSSFRow row = sheet.createRow(0);
         row.setHeightInPoints(25);
         
-        row.createCell(0).setCellValue("行业");
-        row.getCell(0).setCellStyle(style);
+        row.createCell(0).setCellStyle(style);
+        row.createCell(1).setCellStyle(style);
+        row.createCell(2).setCellStyle(style);
+        row.createCell(3).setCellStyle(style);
+        row.createCell(4).setCellStyle(style);
+        row.createCell(5).setCellStyle(style);
+        row.createCell(6).setCellStyle(style);
+        row.createCell(7).setCellStyle(style);
+        row.createCell(8).setCellStyle(style);
+        row.createCell(9).setCellStyle(style);
+        row.createCell(10).setCellStyle(style);
+        row.createCell(11).setCellStyle(style);
+        row.createCell(12).setCellStyle(style);
+        row.createCell(13).setCellStyle(style);
+        row.createCell(14).setCellStyle(style);
+        row.createCell(15).setCellStyle(style);
+        row.createCell(16).setCellStyle(style);
+        row.createCell(17).setCellStyle(style);
+        row.createCell(18).setCellStyle(style);
+        row.createCell(19).setCellStyle(style);
+        row.createCell(20).setCellStyle(style);
+        row.createCell(21).setCellStyle(style);
+        row.createCell(22).setCellStyle(style);
         
-        row.createCell(1).setCellValue("生态圈");
-        row.getCell(1).setCellStyle(style);
+        row.getCell(0).setCellValue("行业");
+        row.getCell(1).setCellValue("生态圈");
+        row.getCell(2).setCellValue("产品");
+        row.getCell(3).setCellValue("项目名称");
+        row.getCell(4).setCellValue("ISV");
+        row.getCell(5).setCellValue("SPP解决方案");
+        row.getCell(6).setCellValue("项目背景");
+        row.getCell(7).setCellValue("需求描述");
+        row.getCell(8).setCellValue("项目金额");
+        row.getCell(9).setCellValue("交付时间");
+        row.getCell(10).setCellValue("项目进展");
+        row.getCell(11).setCellValue("调用能力");
+        row.getCell(12).setCellValue("一线对接进展");
+        row.getCell(13).setCellValue("项目接口人");
+        row.getCell(14).setCellValue("接口人电话");
+        row.getCell(15).setCellValue("接口人邮箱");
+        row.getCell(16).setCellValue("华为接口人");
+        row.getCell(17).setCellValue("华为接口部门");
+        row.getCell(18).setCellValue("eSDK接口人");
+        row.getCell(19).setCellValue("开始时间");
+        row.getCell(20).setCellValue("结束时间");
+        row.getCell(21).setCellValue("备注");
+        row.getCell(22).setCellValue("SPP解决方案状态");
         
-        row.createCell(2).setCellValue("产品");
-        row.getCell(2).setCellStyle(style);
-        
-        row.createCell(3).setCellValue("项目名称");
-        row.getCell(3).setCellStyle(style);
+        sheet.setColumnWidth(2, 23 * 256);
         sheet.setColumnWidth(3, 20 * 256);
-        
-        row.createCell(4).setCellValue("ISV");
-        row.getCell(4).setCellStyle(style);
         sheet.setColumnWidth(4, 15 * 256);
-        
-        row.createCell(5).setCellValue("SPP解决方案");
-        row.getCell(5).setCellStyle(style);
         sheet.setColumnWidth(5, 15 * 256);
-        
-        row.createCell(6).setCellValue("项目背景");
-        row.getCell(6).setCellStyle(style);
-        sheet.setColumnWidth(6, 30 * 256);
-        
-        row.createCell(7).setCellValue("需求描述");
-        row.getCell(7).setCellStyle(style);
-        sheet.setColumnWidth(7, 30 * 256);
-        
-        row.createCell(8).setCellValue("项目金额");
-        row.getCell(8).setCellStyle(style);
+        sheet.setColumnWidth(6, 35 * 256);
+        sheet.setColumnWidth(7, 35 * 256);
         sheet.setColumnWidth(8, 15 * 256);
-        
-        row.createCell(9).setCellValue("交付时间");
-        row.getCell(9).setCellStyle(style);
         sheet.setColumnWidth(9, 15 * 256);
-        
-        row.createCell(10).setCellValue("项目进展");
-        row.getCell(10).setCellStyle(style);
         sheet.setColumnWidth(10, 25 * 256);
-        
-        row.createCell(11).setCellValue("调用能力");
-        row.getCell(11).setCellStyle(style);
         sheet.setColumnWidth(11, 25 * 256);
-        
-        row.createCell(12).setCellValue("一线对接进展");
-        row.getCell(12).setCellStyle(style);
         sheet.setColumnWidth(12, 15 * 256);
-        
-        row.createCell(13).setCellValue("项目接口人");
-        row.getCell(13).setCellStyle(style);
-        
-        row.createCell(14).setCellValue("接口人电话");
-        row.getCell(14).setCellStyle(style);
-        
-        row.createCell(15).setCellValue("接口人邮箱");
-        row.getCell(15).setCellStyle(style);
         sheet.setColumnWidth(15, 15 * 256);
-        
-        row.createCell(16).setCellValue("华为接口人");
-        row.getCell(16).setCellStyle(style);
-        
-        row.createCell(17).setCellValue("华为接口部门");
-        row.getCell(17).setCellStyle(style);
-        
-        row.createCell(18).setCellValue("eSDK接口人");
-        row.getCell(18).setCellStyle(style);
-        
-        row.createCell(19).setCellValue("开始时间");
-        row.getCell(19).setCellStyle(style);
-        
-        row.createCell(20).setCellValue("结束时间");
-        row.getCell(20).setCellStyle(style);
-        
-        row.createCell(21).setCellValue("备注");
-        row.getCell(21).setCellStyle(style);
         sheet.setColumnWidth(21, 20 * 256);
-        
-        row.createCell(22).setCellValue("SPP解决方案状态");
-        row.getCell(22).setCellStyle(style);
         sheet.setColumnWidth(22, 20 * 256);
     }
     
-    private void createData(HSSFSheet sheet, ProjectModel project, int index)
+    private void createData(SXSSFSheet sheet, ProjectModel project, int index)
     {
         ProgressModel progressModel = new ProgressModel();
         progressModel.setProj_id(project.getId());
@@ -221,66 +203,76 @@ public class ProjectExportServlet extends HttpServlet
             count++;
         }
         
-        HSSFCellStyle defaultStyle = new DefaultCellStyle(workbook).style;
-        HSSFCellStyle enumStyle = new EnumCellStyle(workbook).style;
-        HSSFRow row = sheet.createRow(index + 1);
+        CellStyle defaultStyle = new DefaultCellStyle(workbook).style;
+        CellStyle enumStyle = new EnumCellStyle(workbook).style;
+        SXSSFRow row = sheet.createRow(index + 1);
         row.setHeightInPoints(18);
         
-        row.createCell(0, CellType.STRING).setCellValue(project.getIndustry().toString());
-        row.createCell(1, CellType.STRING).setCellValue(project.getEcosphere().toString());
-        row.createCell(2, CellType.STRING).setCellValue(project.getProduct().toString());
-        row.createCell(3, CellType.STRING).setCellValue(project.getProj_name());
-        row.createCell(4, CellType.STRING).setCellValue(project.getIsv());
-        row.createCell(5, CellType.STRING).setCellValue(project.getSpp_solution());
-        row.createCell(6, CellType.STRING).setCellValue(project.getProj_background());
-        row.createCell(7, CellType.STRING).setCellValue(project.getRequirement());
-        row.createCell(8, CellType.STRING).setCellValue(project.getAmount());
-        row.createCell(9, CellType.STRING).setCellValue(project.getDelivery_time());
-        row.createCell(10, CellType.STRING).setCellValue(progressStr);
-        row.createCell(11, CellType.STRING).setCellValue(project.getAbility());
-        row.createCell(12, CellType.STRING).setCellValue(project.getProj_status().toString());
-        row.createCell(13, CellType.STRING).setCellValue(project.getLiaison());
-        row.createCell(14, CellType.STRING).setCellValue(project.getLiaison_tel());
-        row.createCell(15, CellType.STRING).setCellValue(project.getLiaison_email());
-        row.createCell(16, CellType.STRING).setCellValue(project.getHuawei_liaison());
-        row.createCell(17, CellType.STRING).setCellValue(project.getHuawei_liaison_dept());
-        row.createCell(18, CellType.STRING).setCellValue(project.getEsdk_liaison());
-        row.createCell(21, CellType.STRING).setCellValue(project.getRemark());
-        row.createCell(22, CellType.STRING).setCellValue(project.getSpp_status());
+        row.createCell(0, CellType.STRING).setCellStyle(enumStyle);
+        row.createCell(1, CellType.STRING).setCellStyle(enumStyle);
+        row.createCell(2, CellType.STRING).setCellStyle(enumStyle);
+        row.createCell(3, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(4, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(5, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(6, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(7, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(8, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(9, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(10, CellType.STRING).setCellStyle(new WrapCellStyle(workbook).style);
+        row.createCell(11, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(12, CellType.STRING).setCellStyle(enumStyle);
+        row.createCell(13, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(14, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(15, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(16, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(17, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(18, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(19, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(20, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(21, CellType.STRING).setCellStyle(defaultStyle);
+        row.createCell(22, CellType.STRING).setCellStyle(defaultStyle);
         
-        row.getCell(0).setCellStyle(enumStyle);
-        row.getCell(1).setCellStyle(enumStyle);
-        row.getCell(2).setCellStyle(enumStyle);
-        row.getCell(3).setCellStyle(defaultStyle);
-        row.getCell(4).setCellStyle(defaultStyle);
-        row.getCell(5).setCellStyle(defaultStyle);
-        row.getCell(6).setCellStyle(defaultStyle);
-        row.getCell(7).setCellStyle(defaultStyle);
-        row.getCell(8).setCellStyle(defaultStyle);
-        row.getCell(9).setCellStyle(defaultStyle);
-        row.getCell(10).setCellStyle(new WrapCellStyle(workbook).style);
-        row.getCell(11).setCellStyle(defaultStyle);
-        row.getCell(12).setCellStyle(enumStyle);
-        row.getCell(13).setCellStyle(defaultStyle);
-        row.getCell(14).setCellStyle(defaultStyle);
-        row.getCell(15).setCellStyle(defaultStyle);
-        row.getCell(16).setCellStyle(defaultStyle);
-        row.getCell(17).setCellStyle(defaultStyle);
-        row.getCell(18).setCellStyle(defaultStyle);
-        row.getCell(21).setCellStyle(defaultStyle);
-        row.getCell(22).setCellStyle(defaultStyle);
-        
+        row.getCell(0).setCellValue(project.getIndustry().toString());
+        row.getCell(1).setCellValue(project.getEcosphere().toString());
+        row.getCell(2).setCellValue(ProjectBeanConvertor.convertProduct(project.getProduct()));
+        row.getCell(3).setCellValue(project.getProj_name());
+        row.getCell(4).setCellValue(project.getIsv());
+        row.getCell(5).setCellValue(getString(project.getSpp_solution()));
+        row.getCell(6).setCellValue(getString(project.getProj_background()));
+        row.getCell(7).setCellValue(getString(project.getRequirement()));
+        row.getCell(8).setCellValue(getString(project.getAmount()));
+        row.getCell(9).setCellValue(project.getDelivery_time());
+        row.getCell(10).setCellValue(progressStr);
+        row.getCell(11).setCellValue(project.getAbility());
+        row.getCell(12).setCellValue(project.getProj_status().toString());
+        row.getCell(13).setCellValue(project.getLiaison());
+        row.getCell(14).setCellValue(getString(project.getLiaison_tel()));
+        row.getCell(15).setCellValue(getString(project.getLiaison_email()));
+        row.getCell(16).setCellValue(getString(project.getHuawei_liaison()));
+        row.getCell(17).setCellValue(getString(project.getHuawei_liaison_dept()));
+        row.getCell(18).setCellValue(getString(project.getEsdk_liaison()));
         if (null != project.getStart_time())
         {
-            row.createCell(19, CellType.STRING).setCellValue(formator.format(project.getStart_time()));
-            row.getCell(19).setCellStyle(defaultStyle);
-            
+            row.getCell(19).setCellValue(formator.format(project.getStart_time()));
+        }
+        else
+        {
+            row.getCell(19).setCellValue("");
         }
         if (null != project.getEnd_time())
         {
-            row.createCell(20, CellType.STRING).setCellValue(formator.format(project.getEnd_time()));
-            row.getCell(20).setCellStyle(defaultStyle);
+            row.getCell(20).setCellValue(formator.format(project.getEnd_time()));
         }
+        else
+        {
+            row.getCell(20).setCellValue("");
+        }
+        row.getCell(21).setCellValue(project.getRemark());
+        row.getCell(22).setCellValue(getString(project.getSpp_status()));
+    }
+    
+    private static String getString(String str)
+    {
+        return null == str ? "" : str;
     }
 }
-

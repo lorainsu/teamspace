@@ -1,4 +1,5 @@
-function to_login_page() {
+}
+n to_login_page() {
 	document.getElementById('login_page').style.display = '';
 	document.getElementById('edit_page').style.display = "none";
 }

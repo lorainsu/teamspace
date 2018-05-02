@@ -56,7 +56,6 @@ function export_tab() {
 	excelForm.submit();
 	document.body.removeChild(excelForm);
 }
-
 // 显示添加数据表格
 function to_add_tab() {
 	document.getElementById('detail_tab').style.display = '';
@@ -64,6 +63,7 @@ function to_add_tab() {
 	document.getElementById('edit_button').style.display = "none";
 	document.getElementById('add_button').style.display = '';
 
+	document.getElementById('project_name_update').innerHTML = "添加项目";
 	document.getElementById("search_industry").value = "";
 	document.getElementById("search_ecosphere").value = "";
 	document.getElementById("search_product").value = "";
@@ -96,16 +96,20 @@ function to_add_tab() {
 	document.getElementById("start_time").value = "";
 	document.getElementById("end_time").value = "";
 	document.getElementById("remark").value = "";
-	$(".bootstrap-table").hide();
+	// $(".bootstrap-table").hide();
+	$("#top_search").hide();
+	$("#top_progress").hide();
+	$("#top_project_update").show();
 }
 
 // 显示编辑数据表格
-function to_edit_tab(id) {
+function to_edit_tab(id, proj_name) {
 	document.getElementById('detail_tab').style.display = "";
 	document.getElementById('edit_button').style.display = "";
 	document.getElementById('project_tab').style.display = 'none';
 	document.getElementById('add_button').style.display = "none";
 
+	document.getElementById('project_name_update').innerHTML = proj_name;
 	document.getElementById("search_industry").value = "";
 	document.getElementById("search_ecosphere").value = "";
 	document.getElementById("search_product").value = "";
@@ -115,15 +119,19 @@ function to_edit_tab(id) {
 	document.getElementById("search_start_time").value = "";
 	document.getElementById("search_end_time").value = "";
 	document.getElementById("search_key_proj").value = "";
-	$(".bootstrap-table").hide();
+	// $(".bootstrap-table").hide();
+
+	$("#top_search").hide();
+	$("#top_progress").hide();
+	$("#top_project_update").show();
 	$
 			.ajax({
 				type : "get",// 方法类型
-				dataType : "html",// 预期服务器返回的数据类型
-				url : "project?id=" + id,// url
+				dataType : "json",// 预期服务器返回的数据类型
+				url : "project?id=" + id + "&timestamp=" + new Date().getTime(),// url
 				async : false,
-				success : function(result) {
-					var project = new Function("return" + result)();
+				success : function(data) {
+					var project = eval(data);
 					document.getElementById("id").value = project.id;
 					document.getElementById("industry").value = project.industry;
 					document.getElementById("ecosphere").value = project.ecosphere;
@@ -273,7 +281,6 @@ function delete_progress() {
 		});
 	}
 }
-
 // 校验必选框数据
 function check_data() {
 	var industry = document.getElementById("industry").value;
@@ -390,7 +397,6 @@ function edit_project() {
 				}
 			});
 }
-
 // 增加新的进度
 function add_progress() {
 	var content = document.getElementById("content").value;
@@ -434,9 +440,7 @@ function show_progress(id, proj_name) {
 		contentType : "application/x-www-form-urlencoded",
 		url : "progress/query?proj_id=" + id,
 		dataType : 'json',
-		toolbar : '#toolbar1',// 指定工具栏
 		striped : true, // 是否显示行间隔色
-		showRefresh : true, // 显示刷新按钮
 		pagination : true,// 是否分页
 		sidePagination : "server",
 		sortable : true, // 是否启用排序
@@ -449,19 +453,10 @@ function show_progress(id, proj_name) {
 		pageSize : 10, // 每页的记录行数（*）
 		pageList : [ 10, 20, 30 ], // 可供选择的每页的行数（*）
 		clickToSelect : true,// 是否启用点击选中行
-		toolbarAlign : 'right',// 工具栏对齐方式
+
 		buttonsAlign : 'right',// 按钮对齐方式
-		showToggle : true, // 是否显示详细视图和列表视图的切换按钮
-		showColumns : true, // 是否显示所有的列
+
 		columns : [ {
-			title : '全选',
-			field : 'select',
-			// 复选框
-			checkbox : true,
-			width : 50,
-			align : 'center',
-			valign : 'middle'
-		}, {
 			field : 'id',
 			title : '序号',
 			visible : false,
@@ -470,13 +465,12 @@ function show_progress(id, proj_name) {
 		}, {
 			field : 'update_time',
 			title : '更新时间',
-			width : 300,
-			sortable : true,
+			width : 400,
 			align : 'center'
 		}, {
 			field : 'content',
 			title : '项目进展',
-			align : 'left'
+			align : 'center'
 		} ],
 		onLoadSuccess : function() {
 		},
@@ -490,10 +484,9 @@ function show_progress(id, proj_name) {
 	document.getElementById('progress_tab').style.display = '';
 	document.getElementById('top_progress').style.display = '';
 	document.getElementById('proj_id').value = id;
-	document.getElementById('project_name').innerHTML = proj_name;
+	document.getElementById('progress_proj_name').innerHTML = proj_name;
 	$("#top_search").hide();
-	$("#toolbar").hide();
-	$("#toolbar1").hide();
+	$("#top_project_update").hide();
 
 	// 请求服务数据时所传参数
 	function queryParams(params) {

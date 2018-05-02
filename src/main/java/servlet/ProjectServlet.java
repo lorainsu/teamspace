@@ -34,6 +34,8 @@ public class ProjectServlet extends HttpServlet
         System.out.println("ProjectServlet doGet");
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json;charset=UTF-8");
+        resp.setHeader("Cache-Control", "no-cache, must-revalidate");
         
         int id = StringUtils.getId(req.getParameter("id"));
         if (id < 1)

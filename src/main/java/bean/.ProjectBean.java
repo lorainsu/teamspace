@@ -1,20 +1,20 @@
-package dao.model;
+package bean;
 
 import java.util.Date;
 
 import common.constants.Ecosphere;
 import common.constants.Industry;
-import common.constants.Product;
 import common.constants.Status;
-import dao.base.BaseModel;
 
-public class ProjectModel extends BaseModel
+public class ProjectBean
 {
+    private int id;
+    
     private Industry industry;
     
     private Ecosphere ecosphere;
     
-    private Product product;
+    private String product;
     
     private String proj_name;
     
@@ -58,6 +58,16 @@ public class ProjectModel extends BaseModel
     
     private int key_proj;
     
+    public int getId()
+    {
+        return id;
+    }
+    
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    
     public Industry getIndustry()
     {
         return industry;
@@ -78,12 +88,12 @@ public class ProjectModel extends BaseModel
         this.ecosphere = ecosphere;
     }
     
-    public Product getProduct()
+    public String getProduct()
     {
         return product;
     }
     
-    public void setProduct(Product product)
+    public void setProduct(String product)
     {
         this.product = product;
     }

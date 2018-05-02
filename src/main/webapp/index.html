@@ -3,9 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link type="image/x-icon" rel="icon" href="img/favicon.ico">
 
 <script src="js/jquery-1.9.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="laydate/laydate.js"></script>
 <script src="js/index.js"></script>
 
 <link href="css/bootstrap.css" rel="stylesheet" />
@@ -62,12 +64,13 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" style="margin-right: 230px">
-                        <a id="nav_username" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 18px;" href="#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" style="font-size: 18px;" href="#">
                             <span class="glyphicon glyphicon-user"></span>
-                            李昆
+                            <span id="nav_username">用户名</span>
                             <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu" style="width: 104px">
+
+                        <ul class="dropdown-menu" style="width: 122px">
                             <li>
                                 <a href="#">个人中心</a>
                             </li>
@@ -90,6 +93,28 @@
 						$('#div_workbook').load('div/div_workbook.html');
 						$('#div_confnote').load('div/div_confnote.html');
 						$('#div_projinfo').load('div/div_projinfo.html');
+
+						$
+								.ajax({
+									type : "get",// 方法类型
+									dataType : 'json',
+									url : "user",
+									async : false,
+									success : function(data) {
+										var user = eval(data);
+										document.getElementById("nav_username").innerHTML = user.name;
+									},
+									error : function(XMLHttpRequest) {
+										if (XMLHttpRequest.readyState == 4
+												&& XMLHttpRequest.status == 403) {
+											alert("页面超时！");
+											window.location = "/teamspace";
+										} else {
+											alert("获取用户信息异常:"
+													+ XMLHttpRequest.status);
+										}
+									}
+								})
 					}
 				</script>
 </body>
